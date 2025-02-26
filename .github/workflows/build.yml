@@ -2,8 +2,8 @@ name: Build & Release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - v*
 
 jobs:
   build:
@@ -21,10 +21,15 @@ jobs:
       - name: Build
         run: go build ./cmd/lazy
 
+      - name: Get Tag
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0)
+          echo "latest_tag=${latest_tag}" >> $GITHUB_ENV
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: lazy
-          tag_name: v0.0.1
+          tag_name: ${{ env.latest_tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
