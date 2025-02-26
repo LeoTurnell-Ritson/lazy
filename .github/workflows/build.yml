@@ -21,6 +21,12 @@ jobs:
       - name: Build
         run: go build ./cmd/lazy
 
+      - name: Tag
+        run: |
+          TAG="v0.0.1"
+          git tag $TAG
+          git push origin $TAG
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
