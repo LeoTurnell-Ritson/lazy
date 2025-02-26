@@ -1,4 +1,4 @@
-name: Build Lazy Release
+name: Build & Release
 
 on:
   push:
