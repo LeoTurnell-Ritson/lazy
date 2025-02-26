@@ -19,7 +19,7 @@ jobs:
           go-version: '1.23'
 
       - name: Build
-        run: go build cmd/lazy
+        run: go build ./cmd/lazy
 
       - name: Release
         uses: softprops/action-gh-release@v1
